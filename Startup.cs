@@ -1,3 +1,8 @@
+using FacebookData.GraphQL;
+using FacebookData.Repository;
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.SystemTextJson;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +25,14 @@ namespace FacebookData
     {
       services.AddControllers();
       services.AddSingleton(Configuration);
+      services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+      services.AddSingleton<IDocumentWriter, DocumentWriter>();
+      services.AddScoped<PostRepository>();
+      services.AddScoped<FacebookSchema>();
+      services.AddGraphQL()
+        .AddGraphTypes(ServiceLifetime.Scoped)
+        .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { }); // For .NET Core 3+
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +51,9 @@ namespace FacebookData
       {
         endpoints.MapControllers();
       });
+      app.UseGraphQL<FacebookSchema>();
       app.UseGraphiQLServer();
+
     }
   }
 }

@@ -4,7 +4,7 @@ using GraphQL.Utilities;
 
 namespace FacebookData.GraphQL
 {
-  public class FacebookSchema :Schema
+  public class FacebookSchema : Schema
   {
     public FacebookSchema(IServiceProvider  resolver) :base(resolver)
     {

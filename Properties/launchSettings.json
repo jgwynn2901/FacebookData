@@ -20,7 +20,7 @@
     "FacebookData": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "graphql",
+      "launchUrl": "ui/graphiql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

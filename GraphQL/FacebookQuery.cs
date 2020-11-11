@@ -11,6 +11,8 @@ namespace FacebookData.GraphQL
     {
       int id;
 
+      Name = "Query";
+
       Field<ListGraphType<PostType>>(
         name:"posts", resolve: context => repository.FindAll());
 
